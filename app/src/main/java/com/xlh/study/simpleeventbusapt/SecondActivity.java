@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.xlh.study.eventbus.annotation.WxSubscribe;
 import com.xlh.study.eventbus.annotation.mode.ThreadMode;
-import com.xlh.study.eventbus.library.EventBus;
+import com.xlh.study.eventbus.library.WxEventBus;
 import com.xlh.study.simpleeventbusapt.bean.MessageBean;
 
 import androidx.annotation.Nullable;
@@ -69,7 +69,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         bean.setTitle("SecondActivity标题");
         bean.setContent("SecondActivity内容");
 
-        EventBus.getDefault().post(bean);
+        WxEventBus.getDefault().post(bean);
 
 //        finish();
 
@@ -78,8 +78,8 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     private void stickyMessage() {
 
-        EventBus.getDefault().register(this);
-        EventBus.getDefault().removeStickyEvent(MessageBean.class);
+        WxEventBus.getDefault().register(this);
+        WxEventBus.getDefault().removeStickyEvent(MessageBean.class);
 
     }
 
@@ -95,14 +95,14 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     protected void onDestroy() {
         super.onDestroy();
         // 示例代码
-        MessageBean userInfo = EventBus.getDefault().getStickyEvent(MessageBean.class);
+        MessageBean userInfo = WxEventBus.getDefault().getStickyEvent(MessageBean.class);
         if (userInfo != null) {
-            MessageBean info = EventBus.getDefault().removeStickyEvent(MessageBean.class);
+            MessageBean info = WxEventBus.getDefault().removeStickyEvent(MessageBean.class);
             if (info != null) {
-                EventBus.getDefault().removeAllStickyEvents();
+                WxEventBus.getDefault().removeAllStickyEvents();
             }
         }
-        EventBus.getDefault().unregister(this);
+        WxEventBus.getDefault().unregister(this);
     }
 
 

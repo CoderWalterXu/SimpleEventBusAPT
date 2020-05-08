@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.xlh.study.eventbus.annotation.WxSubscribe;
 import com.xlh.study.eventbus.annotation.mode.ThreadMode;
 import com.xlh.study.eventbus.apt.EventBusIndex;
-import com.xlh.study.eventbus.library.EventBus;
+import com.xlh.study.eventbus.library.WxEventBus;
 import com.xlh.study.simpleeventbusapt.bean.MessageBean;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initListener();
 
         // EventBusIndex：编译时生成该类，在app\build\generated\ap_generated_sources\debug\out\com\xlh\study\eventbus\apt\EventBusIndex.java
-        EventBus.getDefault().addIndex(new EventBusIndex());
-        EventBus.getDefault().register(this);
+        WxEventBus.getDefault().addIndex(new EventBusIndex());
+        WxEventBus.getDefault().register(this);
 
     }
 
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bean.setTitle("MainActivity标题");
         bean.setContent("MainActivity内容");
 
-        EventBus.getDefault().postSticky(bean);
+        WxEventBus.getDefault().postSticky(bean);
     }
 
 
@@ -121,10 +121,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().unregister(this);
+        if (WxEventBus.getDefault().isRegistered(this)) {
+            WxEventBus.getDefault().unregister(this);
         }
-        EventBus.clearCaches();
+        WxEventBus.clearCaches();
 
         if (mHandler != null) {
             mHandler.removeCallbacksAndMessages(null);

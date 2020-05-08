@@ -24,10 +24,10 @@ import java.util.concurrent.Executors;
  * description:
  * version:0.0.1
  */
-public class EventBus {
+public class WxEventBus {
 
     // volatile修饰的变量不允许线程内部缓存和指令重排序，即直接修改内存
-    private static volatile EventBus defaultInstance;
+    private static volatile WxEventBus defaultInstance;
     // 索引接口
     private SubscriberInfoIndex subscriberInfoIndexs;
     /**
@@ -55,7 +55,7 @@ public class EventBus {
     // 发送（主线程），订阅（子线程）
     private ExecutorService mExecutorService;
 
-    private EventBus() {
+    private WxEventBus() {
         // 初始化缓存集合
         typesBySubscriber = new HashMap<>();
         subscriptionsByEventType = new HashMap<>();
@@ -64,11 +64,11 @@ public class EventBus {
         mExecutorService = Executors.newCachedThreadPool();
     }
 
-    public static EventBus getDefault() {
+    public static WxEventBus getDefault() {
         if (defaultInstance == null) {
-            synchronized (EventBus.class) {
+            synchronized (WxEventBus.class) {
                 if (defaultInstance == null) {
-                    defaultInstance = new EventBus();
+                    defaultInstance = new WxEventBus();
                 }
             }
         }

@@ -8,6 +8,6 @@ package com.xlh.study.simpleeventbusapt;
  */
 public class Constants {
 
-    public static final String TAG = "EventBus";
+    public static final String TAG = "WxEventBus";
 
 }
